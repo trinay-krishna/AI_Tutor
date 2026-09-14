@@ -1,16 +1,28 @@
-# React + Vite
+# AI Tutor — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React 19 + Vite, plain JSX (no TypeScript), managed with [`bun`](https://bun.sh).
 
-Currently, two official plugins are available:
+See the repo root for full docs: [Architecture](../docs/ARCHITECTURE.md) · [API reference](../docs/API.md) · [Development guide](../docs/DEVELOPMENT.md).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Layout
 
-## React Compiler
+```
+src/
+  api.js           fetch wrapper (same-origin via the Vite dev proxy, credentials included)
+  main.jsx, App.jsx  entry point, router + layout
+  auth/            session context, RequireAuth / RequireAdmin route guards
+  pages/           Technologies, Chat, Login, Register, admin/*
+  components/      MessageBubble, SourceList, NavBar
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Commands
 
-## Expanding the ESLint configuration
+```bash
+bun install
+bun run dev       # dev server; proxies /api to API_PROXY_TARGET (default http://localhost:8000)
+bun run lint
+bun run build
+bun run preview
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Normally you'd run this via Docker Compose from the repo root instead — see the [quick start](../README.md#quick-start). After adding a dependency, refresh the container's `node_modules` volume: `docker compose up -d --build -V frontend`.

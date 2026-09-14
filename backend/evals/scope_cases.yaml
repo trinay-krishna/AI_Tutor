@@ -1,0 +1,206 @@
+# Scope/intent classifier eval set. Run with:
+#   uv run python -m src.scripts.eval_scope
+#
+# Each case is a single-turn message (no history) classified against `technology`.
+# expected_scope: technology | related | unrelated
+# expected_intent: question | study_plan
+
+- technology: React
+  message: "How does useEffect work?"
+  expected_scope: technology
+  expected_intent: question
+
+- technology: React
+  message: "What's the difference between useMemo and useCallback?"
+  expected_scope: technology
+  expected_intent: question
+
+- technology: React
+  message: "Why does my component re-render twice in development?"
+  expected_scope: technology
+  expected_intent: question
+
+- technology: React
+  message: "How do I lift state up between sibling components?"
+  expected_scope: technology
+  expected_intent: question
+
+- technology: React
+  message: "What's the best way to handle forms in React?"
+  expected_scope: technology
+  expected_intent: question
+
+- technology: React
+  message: "How does React's reconciliation algorithm decide what to re-render?"
+  expected_scope: technology
+  expected_intent: question
+
+- technology: React
+  message: "Show me how to use the useReducer hook."
+  expected_scope: technology
+  expected_intent: question
+
+- technology: FastAPI
+  message: "How do I add dependency injection to a route?"
+  expected_scope: technology
+  expected_intent: question
+
+- technology: Docker
+  message: "What's the difference between COPY and ADD in a Dockerfile?"
+  expected_scope: technology
+  expected_intent: question
+
+- technology: React
+  message: "What is Docker?"
+  expected_scope: related
+  expected_intent: question
+
+- technology: React
+  message: "How do I run my React app inside a Docker container?"
+  expected_scope: related
+  expected_intent: question
+
+- technology: React
+  message: "What's a good Git branching strategy for a small team?"
+  expected_scope: related
+  expected_intent: question
+
+- technology: React
+  message: "How do I write a good README for my open-source project?"
+  expected_scope: related
+  expected_intent: question
+
+- technology: React
+  message: "What's the difference between SQL and NoSQL databases?"
+  expected_scope: related
+  expected_intent: question
+
+- technology: React
+  message: "What's a good way to prepare for a software engineering interview?"
+  expected_scope: related
+  expected_intent: question
+
+- technology: React
+  message: "Hi, what can you help me with?"
+  expected_scope: related
+  expected_intent: question
+
+- technology: React
+  message: "hello!"
+  expected_scope: related
+  expected_intent: question
+
+- technology: React
+  message: "What's the time complexity of quicksort?"
+  expected_scope: related
+  expected_intent: question
+
+- technology: React
+  message: "Should I learn Vue or Svelte next?"
+  expected_scope: related
+  expected_intent: question
+
+- technology: React
+  message: "Who won yesterday's cricket match?"
+  expected_scope: unrelated
+  expected_intent: question
+
+- technology: React
+  message: "What's a good recipe for lasagna?"
+  expected_scope: unrelated
+  expected_intent: question
+
+- technology: React
+  message: "Can you recommend a good laptop for gaming?"
+  expected_scope: unrelated
+  expected_intent: question
+
+- technology: React
+  message: "What's the weather like tomorrow?"
+  expected_scope: unrelated
+  expected_intent: question
+
+- technology: React
+  message: "Tell me a joke about cats."
+  expected_scope: unrelated
+  expected_intent: question
+
+- technology: React
+  message: "What's the capital of Australia?"
+  expected_scope: unrelated
+  expected_intent: question
+
+- technology: React
+  message: "Can you help me write a birthday message for my friend?"
+  expected_scope: unrelated
+  expected_intent: question
+
+- technology: React
+  message: "What stocks should I invest in?"
+  expected_scope: unrelated
+  expected_intent: question
+
+- technology: React
+  message: "By the way, who won the match yesterday? Also, how does useState work?"
+  expected_scope: technology
+  expected_intent: question
+
+- technology: React
+  message: "Quick unrelated question -- best pizza toppings? Anyway, what's a key prop for?"
+  expected_scope: technology
+  expected_intent: question
+
+- technology: React
+  message: "Create me a 4-week study plan to learn React from beginner to advanced."
+  expected_scope: technology
+  expected_intent: study_plan
+
+- technology: React
+  message: "I want to become job-ready in React in 2 months, can you plan it out for me?"
+  expected_scope: technology
+  expected_intent: study_plan
+
+- technology: React
+  message: "How should I structure my next 6 weeks of learning this?"
+  expected_scope: technology
+  expected_intent: study_plan
+
+- technology: React
+  message: "Give me a roadmap for mastering React hooks."
+  expected_scope: technology
+  expected_intent: study_plan
+
+- technology: FastAPI
+  message: "Make me a study plan to go from zero to building production APIs with FastAPI."
+  expected_scope: technology
+  expected_intent: study_plan
+
+- technology: React
+  message: "Can you make me a general plan for becoming a full-stack developer?"
+  expected_scope: related
+  expected_intent: study_plan
+
+- technology: React
+  message: "What's a good study plan for learning Docker instead?"
+  expected_scope: related
+  expected_intent: study_plan
+
+- technology: React
+  message: "Plan out my workout routine for the next month."
+  expected_scope: unrelated
+  expected_intent: study_plan
+
+- technology: React
+  message: "What does 'key' do in a list of React elements?"
+  expected_scope: technology
+  expected_intent: question
+
+- technology: React
+  message: "Explain the virtual DOM like I'm five."
+  expected_scope: technology
+  expected_intent: question
+
+- technology: React
+  message: "What's the best code editor for web development?"
+  expected_scope: related
+  expected_intent: question

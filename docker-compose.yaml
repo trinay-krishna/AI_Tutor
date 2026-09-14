@@ -1,18 +1,54 @@
 services:
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-ai_tutor}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
   backend:
     build: ./backend
+    env_file:
+      - .env
     ports:
       - "8000:80"
     volumes:
       - ./backend:/app
-    command: uv run uvicorn src.main:app --host 0.0.0.0 --port 80 --reload
-  
+      - /app/.venv
+    depends_on:
+      db:
+        condition: service_healthy
+    # SSL_CERT_FILE: the OpenAI SDK's HTTP client (httpx2/httpcore2) verifies TLS via
+    # the `truststore` package (the OS-native cert store) by default instead of
+    # certifi's bundle; that lookup fails inside this image ("self-signed
+    # certificate in certificate chain" against api.openai.com, even though the
+    # cert itself is a normal Google Trust Services-issued one). Pointing it at
+    # certifi's well-maintained bundle instead fixes it with no verification
+    # weakened. Resolved dynamically since it lives inside the venv.
+    command: >
+      sh -c "export SSL_CERT_FILE=$(uv run python -m certifi) &&
+      uv run alembic upgrade head &&
+      uv run uvicorn src.main:app --host 0.0.0.0 --port 80 --reload"
 
   frontend:
     build: ./frontend
+    environment:
+      API_PROXY_TARGET: http://backend:80
     ports:
       - "5173:5173"
     volumes:
       - ./frontend:/app
       - /app/node_modules
     command: bun run dev --host 0.0.0.0
+
+volumes:
+  pgdata:
